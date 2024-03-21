@@ -1,15 +1,14 @@
 #!/usr/bin/python3
+
 """
 Module for minimum operations problem
 """
 
+
 def minOperations(n):
-
-
     """
     Calculates the fewest number of operations needed to result in exactiy n H characters.
     """
-
     if not isinstance(n, int) or n <= 0:
         return 0
 
