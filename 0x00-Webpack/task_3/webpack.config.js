@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlWenpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
@@ -9,17 +9,21 @@ module.exports = {
 		errorDetails: true,
 	},
 	entry: {
-		header: './header/header.js',
-		body: './body/body.js',
-		footer: './footer/footer.js',
+		header: './modules/header/header.js',
+		body: './modules/body/body.js',
+		footer: './modules/footer/footer.js',
 	},
 	output: {
-		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'public'),
+		filename: '[name].bundle.js',
+		assetModuleFilename: '[name][ext]',
 	},
 	devServer: {
-		static: path.resolve(__dirname, 'public'),
+		static: {
+			directory: path.resolve(__dirname, 'public')
+		},
 		port: 8564,
+		open: true,
 	},
 	module: {
 		rules: [
@@ -29,12 +33,12 @@ module.exports = {
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/i,
-				type: 'asset/resource',
+				type: 'assets/resource',
 			},
 		],
 	},
 	plugins: [
-		new HtmlWenpackPlugin({
+		new HtmlWebpackPlugin({
 			template: './public/index.html',
 			minify: {
 				collapseWhitespace: true,
